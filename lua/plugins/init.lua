@@ -262,6 +262,22 @@ local default_plugins = {
       require("which-key").setup(opts)
     end,
   },
+  {
+    "pocco81/auto-save.nvim",
+    lazy = false,  -- Если вы хотите загружать плагин сразу при старте
+    config = function()
+      require("auto-save").setup({
+        enabled = true,
+        execution_message = {
+          message = function()
+            return "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S")
+          end,
+          dim = 0.18,
+        },
+        trigger_events = { "InsertLeave", "TextChanged" },
+      })
+    end,
+  },
 }
 
 local config = require("core.utils").load_config()
